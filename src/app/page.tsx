@@ -1,9 +1,14 @@
 import ProductCard from "@/components/ProductCard";
+import products from "@/data/product";
 
 export default function Home() {
+  const uniqueCategories = Array.from(
+    new Set(products.map((product) => product.category)),
+  );
+
   return (
     <div className="px-[8vh] py-6">
-      <h1 className="text-3xl font-bold text-center mb-6">
+      <h1 className="text-3xl font-bold underline text-center mb-6">
         Welcome to Oztec Stores
       </h1>
 
@@ -18,11 +23,11 @@ export default function Home() {
             id="products"
             className="border border-gray-300 rounded-md px-3 py-1">
             <option value="all">All</option>
-            <option value="electronics">Electronics</option>
-            <option value="footwear">Footwear</option>
-            <option value="accessories">Accessories</option>
-            <option value="clothing">Clothing</option>
-            <option value="health">Health</option>
+            {uniqueCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </option>
+            ))}
           </select>
         </div>
       </div>

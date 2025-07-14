@@ -9,7 +9,7 @@ function ProductCard() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 cursor-pointer">
       {products.map((product) => {
         const { label, color } = getStockStatus(product.stock);
 
@@ -17,7 +17,6 @@ function ProductCard() {
           <div
             key={product.id}
             className="border p-4 rounded-lg shadow hover:shadow-lg transition relative flex flex-col items-center">
-            {/* Stock Tag */}
             <span
               className={`absolute top-2 right-2 text-white text-xs font-semibold px-2 py-1 rounded ${color}`}>
               {label}
@@ -40,11 +39,10 @@ function ProductCard() {
               ⭐ {product.rating}
             </p>
 
-            {/* View Button */}
             <div className="mt-4 w-full flex justify-center">
               <button
                 type="button"
-                className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition">
+                className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition cursor-pointer">
                 View Product
               </button>
             </div>
