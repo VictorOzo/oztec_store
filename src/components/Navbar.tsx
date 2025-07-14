@@ -62,7 +62,7 @@ const Navbar = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden flex flex-col gap-4 mt-4 font-medium">
+            className="md:hidden flex flex-col gap-4 mt-4 font-medium ">
             <li className="flex items-center gap-2">
               <ShoppingCartIcon />
               <Link href="/" onClick={() => setMenuOpen(false)}>
