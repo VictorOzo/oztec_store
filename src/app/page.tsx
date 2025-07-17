@@ -1,10 +1,30 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
-import products from "@/data/product";
+import { fetchproducts } from "@/api/productApi";
 
 export default function Home() {
-  const uniqueCategories = Array.from(
-    new Set(products.map((product) => product.category)),
-  );
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchproducts();
+
+        setProducts(data);
+
+        // Extract unique categories
+        const uniqueCats = Array.from(new Set(data.map((p) => p.category)));
+        setCategories(uniqueCats);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   return (
     <div className="px-[8vh] py-6">
@@ -23,7 +43,7 @@ export default function Home() {
             id="products"
             className="border border-gray-300 rounded-md px-3 py-1">
             <option value="all">All</option>
-            {uniqueCategories.map((cat) => (
+            {categories.map((cat) => (
               <option key={cat} value={cat}>
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
               </option>
@@ -32,7 +52,7 @@ export default function Home() {
         </div>
       </div>
 
-      <ProductCard />
+      <ProductCard products={products} />
     </div>
   );
 }
